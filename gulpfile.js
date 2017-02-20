@@ -7,7 +7,7 @@ const gulp = require('gulp'),
 gulp.task('styles', function() {
     gulp.src('resources/assets/sass/**/*.scss')
         .pipe(sass({includePaths: ['resources/assets/sass']}))
-    	.pipe(sass().on('error', sass.logError))
+    	//.pipe(sass().on('error', sass.logError))
     	.pipe(sass({outputStyle: 'compressed'}))
         .pipe(gulp.dest('public/css/'))
         .pipe(refresh())

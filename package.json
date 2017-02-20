@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "axios": "^0.15.2",
+    "bootstrap": "^4.0.0-alpha.3",
     "bootstrap-sass": "^3.3.7",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",

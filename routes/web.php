@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.default');
-});
-
 Route::group(['prefix' => 'my-albums'], function () {
 
     Route::get('list', 'Albums\Albumscontroller@index');
 });
 
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index');
