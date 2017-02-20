@@ -8,7 +8,7 @@
         <title>{{ Config::get('app.name') }}</title>
         <base href="{{ Request::root() }}/">
         <!-- Styles -->
-        <script src="{{ asset('css/app.css') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/app.css') }}">
 
     </head>
     <body>
