@@ -11,12 +11,22 @@
 |
 */
 
-Route::group(['prefix' => 'my-albums'], function () {
-
-    Route::get('list', 'Albums\Albumscontroller@index');
-});
-
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+
+Route::group(['prefix' => 'search'], function () {
+    //Route::get('list', 'Albums\Albumscontroller@index');
+});
+
+Route::group(['prefix' => 'browse'], function () {
+});
+
+Route::group(['prefix' => 'music'], function () {
+});
+
+Route::group(['prefix' => 'account'], function () {
+});
+
+Route::group(['prefix' => 'settings'], function () {
+});

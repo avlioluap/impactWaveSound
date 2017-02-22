@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="loginForm col-xs-12 col-lg-4">
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'ImpactWaveSound') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'ImpactWaveSound') }}">
                         <span>{{ config('app.name', 'ImpactWaveSound') }}</span>
                     </a>
