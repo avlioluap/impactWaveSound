@@ -17,16 +17,25 @@ Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'search'], function () {
     //Route::get('list', 'Albums\Albumscontroller@index');
+    Route::get('/', 'HomeController@index');
 });
 
 Route::group(['prefix' => 'browse'], function () {
+	Route::get('/', 'HomeController@index');
+});
+
+Route::group(['prefix' => 'playlist'], function () {
+	Route::get('/', 'HomeController@index');
 });
 
 Route::group(['prefix' => 'music'], function () {
+	Route::get('/', 'HomeController@index');
 });
 
 Route::group(['prefix' => 'account'], function () {
+	Route::get('/', 'HomeController@index');
 });
 
 Route::group(['prefix' => 'settings'], function () {
+	Route::get('/', 'HomeController@index');
 });

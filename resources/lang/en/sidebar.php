@@ -11,8 +11,9 @@ return [
 
     'search'    => 'Search',
     'browse'    => 'Browse',
+    'playlist'  => 'Playlists',
     'music'     => 'Your music',
     'account'   => 'Account',
-    'settings'   => 'Settings',
+    'settings'  => 'Settings',
 
 ];

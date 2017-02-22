@@ -17,6 +17,12 @@
             	</a>
 
             </li>
+            <li {{ (Request::is('playlist') ? 'class=active' : '') }} >
+            	<a href="{{ url('/playlist') }}" class="sideBarLink">
+            		@lang('sidebar.playlist')
+            	</a>
+
+            </li>            
             <li {{ (Request::is('music') ? 'class=active' : '') }} >
             	<a href="{{ url('/music') }}" class="sideBarLink">
             		@lang('sidebar.music')
