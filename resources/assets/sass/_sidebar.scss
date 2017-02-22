@@ -18,6 +18,33 @@
 	.sidebar-body
 	{
 		//
+		ul
+		{
+			li
+			{
+				border-left: 2px solid transparent;
+				height: 4.6rem;
+				margin-bottom: 2px;
+				//
+				.sideBarLink
+				{
+
+					//
+					i
+					{
+						display: block;
+						font-size: 2rem;
+					}
+				}
+
+			}
+
+			li.active
+			{
+				border-left: 2px solid $logoRed;
+			}
+		}
+		//
 	}
 	//
 }

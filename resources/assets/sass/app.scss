@@ -31,12 +31,12 @@ button
 {
 	cursor: pointer;
 	color: $logoWhite;
-	font-weight: bold;
 }
 
 a:hover
 {
 	color: $logoRed;
+	text-decoration: none;
 }
 
 h1
