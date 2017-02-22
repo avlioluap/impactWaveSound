@@ -7,41 +7,41 @@
     <div class="sidebar-body">
     	<ul>
             <li {{ (Request::is('search') ? 'class=active' : '') }} >
-            	<a href="{{ url('/search') }}" class="sideBarLink">
+            	<a href="{{ url('/search') }}" class="sideBarLink d-flex flex-column justify-content-center">
             		<i class="fa fa-search" aria-hidden="true"></i>
-            		@lang('sidebar.search')
+            		<span>@lang('sidebar.search')</span>
             	</a>
             </li>
             <li {{ (Request::is('browse') ? 'class=active' : '') }} >
-            	<a href="{{ url('/browse') }}" class="sideBarLink">
+            	<a href="{{ url('/browse') }}" class="sideBarLink d-flex flex-column justify-content-center">
             		<i class="fa fa-list-ul" aria-hidden="true"></i>
-            		@lang('sidebar.browse')
+            		<span>@lang('sidebar.browse')</span>
             	</a>
 
             </li>
             <li {{ (Request::is('playlist') ? 'class=active' : '') }} >
-            	<a href="{{ url('/playlist') }}" class="sideBarLink">
+            	<a href="{{ url('/playlist') }}" class="sideBarLink d-flex flex-column justify-content-center">
 	            	<i class="fa fa-youtube-play" aria-hidden="true"></i>
-            		@lang('sidebar.playlist')
+            		<span>@lang('sidebar.playlist')</span>
             	</a>
 
             </li>
             <li {{ (Request::is('music') ? 'class=active' : '') }} >
-            	<a href="{{ url('/music') }}" class="sideBarLink">
+            	<a href="{{ url('/music') }}" class="sideBarLink d-flex flex-column justify-content-center">
 	            	<i class="fa fa-headphones" aria-hidden="true"></i>
-            		@lang('sidebar.music')
+            		<span>@lang('sidebar.music')</span>
             	</a>
             </li>
             <li {{ (Request::is('account') ? 'class=active' : '') }} >
-            	<a href="{{ url('/account') }}" class="sideBarLink">
+            	<a href="{{ url('/account') }}" class="sideBarLink d-flex flex-column justify-content-center">
             		<i class="fa fa-user" aria-hidden="true"></i>
-            		{{ Auth::getUser()->name }}
+            		<span>{{ Auth::getUser()->name }}</span>
             	</a>
             </li>
             <li {{ (Request::is('settings') ? 'class=active' : '') }}>
-            	<a href="{{ url('/settings') }}" class="sideBarLink">
+            	<a href="{{ url('/settings') }}" class="sideBarLink d-flex flex-column justify-content-center">
             		<i class="fa fa-cog" aria-hidden="true"></i>
-            		@lang('sidebar.settings')
+            		<span>@lang('sidebar.settings')</span>
             	</a>
             </li>
     	</ul>

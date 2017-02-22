@@ -25,15 +25,20 @@
 				border-left: 2px solid transparent;
 				height: 4.6rem;
 				margin-bottom: 2px;
+				display: flex;
 				//
 				.sideBarLink
 				{
-
+					width: 100%;
 					//
 					i
 					{
-						display: block;
 						font-size: 2rem;
+					}
+
+					span
+					{
+
 					}
 				}
 
