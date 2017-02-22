@@ -1,10 +1,10 @@
-<nav class="navbar">
-    <div class="navbar-header">
-		<a class="navbar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'ImpactWaveSound') }}">
+<nav class="sidebar">
+    <div class="sidebar-header">
+		<a class="sidebar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'ImpactWaveSound') }}">
 			<img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'ImpactWaveSound') }}">
 		</a>
     </div>
-    <div class="navbar-body">
+    <div class="sidebar-body">
     	<ul>
             <li {{ (Request::is('search') ? 'class=active' : '') }} >
             	<a href="{{ url('/search') }}" class="sideBarLink">

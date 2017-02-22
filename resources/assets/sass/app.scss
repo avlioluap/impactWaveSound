@@ -7,6 +7,7 @@
 
 //import various scss
 @import "_login";
+@import "_sidebar";
 
 // Bootstrap
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -62,7 +63,9 @@ ul
 	}
 	//
 }
-
+/**
+ * buttons
+ */
 .btn-primary {
     background: $logoGrey;
     color: $logoWhite;
@@ -77,5 +80,30 @@ ul
 .btn-primary:active, .btn-primary.active {
     background: #007299;
     box-shadow: none;
+}
+/**
+ * appDefault
+ */
+.appWrapper
+{
+	min-height: 100%;
+	width: 100%;
+	display: flex;
+	//
+	#mainMenu
+	{
+		background-color: $logoGrey;
+		align-self: stretch;
+		width: $widthSideBar;
+	}
+	//
+	#mainContent
+	{
+		background-color: $appBg;
+		align-self: stretch;
+		flex-grow: 1;
+		color: $logoWhite;
+	}
+	//
 }
 

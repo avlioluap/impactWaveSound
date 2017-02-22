@@ -12,7 +12,7 @@ return [
     'search'    => 'Search',
     'browse'    => 'Browse',
     'music'     => 'Your music',
-    'Account'   => 'Account',
-    'Setting'   => 'Settings',
+    'account'   => 'Account',
+    'settings'   => 'Settings',
 
 ];
