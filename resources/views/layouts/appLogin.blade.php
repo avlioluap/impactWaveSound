@@ -1,26 +1,33 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.master')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@section('body')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <div id="loginScreen">
+        <div class="loginWrapper container">
+            <div class="row">
+                <div class="loginForm col-xs-12 col-lg-4">
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'ImpactWaveSound') }}">
+                        <span>{{ config('app.name', 'ImpactWaveSound') }}</span>
+                    </a>
+                    @yield('content')
+                </div>
+                <div class="loginMsg col-xs-12 col-lg-8">
+                    <h1>@lang('loginHome.h1')</h1>
+                    <h2>@lang('loginHome.h2')</h2>
+                    <ul>
+                        <li>@lang('loginHome.li1')</li>
+                        <li>@lang('loginHome.li2')</li>
+                        <li>@lang('loginHome.li3')</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
-</head>
-<body>
+    <?php
+    /*
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -80,8 +87,6 @@
 
         @yield('content')
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-</body>
-</html>
+    */
+    ?>
+@endsection
