@@ -1,1 +1,1 @@
-jQuery(document).ready(function(e){console.log("hey")});
+function openClose(e){"true"==e.parent("li").attr("data-sidebar")&&($("#searchSideBar").is(":hidden")?$("#searchSideBar").removeClass("closed"):$("#searchSideBar").addClass("closed"))}$(document).ready(function(e){e(".sidebar-body li a").on("click",function(){openClose(e(this))}),e("#mainContent").click(function(a){e("#searchSideBar").is(":visible")&&e("#searchSideBar").addClass("closed")})});

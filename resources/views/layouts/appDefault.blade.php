@@ -5,6 +5,9 @@
 		<div id="mainMenu">
 			@include('pages.sidebar')
 		</div>
+		<div id="searchSideBar" class="closed">
+			1
+		</div>
 		<div id="mainContent">
 			@yield('content')
 		</div>

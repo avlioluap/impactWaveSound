@@ -24,6 +24,7 @@ body
 	height: 100%;
 	font-size: 100%;
 	background-color: $logoWhite;
+	overflow-x: hidden;
 }
 
 a,
@@ -33,7 +34,8 @@ button
 	color: $logoWhite;
 }
 
-a:hover
+a:hover,
+a:focus
 {
 	color: $logoRed;
 	text-decoration: none;
@@ -95,6 +97,23 @@ ul
 		background-color: $logoGrey;
 		align-self: stretch;
 		width: $widthSideBar;
+		min-width: $widthSideBar;
+	}
+	//
+	#searchSideBar
+	{
+		width: $searchSideBarWidth;
+		min-width: $searchSideBarWidth;
+		align-self: stretch;
+		background-color: $appBg2;
+		transition-property: all;
+		transition-duration: 1s;
+		transition-timing-function: cubic-bezier(0.42,0,1,2);
+	}
+	#searchSideBar.closed
+	{
+		width: 0px;
+		display: none;
 	}
 	//
 	#mainContent
