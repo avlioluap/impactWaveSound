@@ -9,10 +9,12 @@ function openClose(a)
 		if ( $("#searchSideBar").is(":hidden") )
 		{
 			$("#searchSideBar").removeClass('closed');
+			$("#mainContentOverlay").show();
 		}
 		else
 		{
 			$("#searchSideBar").addClass('closed');
+			$("#mainContentOverlay").hide();
 		}
 	}
 }
@@ -28,6 +30,7 @@ $(document).ready(function($) {
 		if ($("#searchSideBar").is(':visible'))
 		{
 			$("#searchSideBar").addClass('closed');
+			$("#mainContentOverlay").hide();
 		}
 	});
 

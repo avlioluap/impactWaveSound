@@ -9,6 +9,7 @@
 			1
 		</div>
 		<div id="mainContent">
+			<div id="mainContentOverlay"></div>
 			@yield('content')
 		</div>
 	</div>

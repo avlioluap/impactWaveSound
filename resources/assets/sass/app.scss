@@ -105,10 +105,15 @@ ul
 		width: $searchSideBarWidth;
 		min-width: $searchSideBarWidth;
 		align-self: stretch;
+		border: 1px solid $logoGrey;
+        -webkit-box-shadow: 2px 0 5px -2px $appBg;
+        box-shadow: 2px 0 5px -2px $appBg;
 		background-color: $appBg2;
 		transition-property: all;
 		transition-duration: 1s;
 		transition-timing-function: cubic-bezier(0.42,0,1,2);
+		position: relative;
+		z-index: 100;
 	}
 	#searchSideBar.closed
 	{
@@ -118,10 +123,24 @@ ul
 	//
 	#mainContent
 	{
-		background-color: $appBg;
+		background: $appBg;
 		align-self: stretch;
 		flex-grow: 1;
 		color: $logoWhite;
+		position: relative;
+		z-index: 80;
+	}
+
+	#mainContentOverlay
+	{
+		position: absolute;
+	    top:0px;
+	    left:0px;
+	    bottom:0px;
+	    right:0px;
+	    background: rgba(0,0,0,0.2);
+	    display:none;
+	    z-index: 90;
 	}
 	//
 }
