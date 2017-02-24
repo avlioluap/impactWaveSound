@@ -1,0 +1,26 @@
+#searchSidebarForm
+{
+	width: 100%;
+	padding: 10px;
+	//
+	.inputWrap
+	{
+		position: relative;
+		//
+		.fa
+		{
+			position: absolute;
+			top: 8px;
+			left: 8px;
+			color: $logoGrey;
+		}
+		//
+		.form-control
+		{
+			padding:0 0 0 30px;
+		}
+		//
+
+	}
+
+}

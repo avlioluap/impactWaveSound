@@ -29,7 +29,7 @@ Route::group(['prefix' => 'playlist'], function () {
 });
 
 Route::group(['prefix' => 'music'], function () {
-	Route::get('/', 'HomeController@index');
+	Route::get('/', 'MusicController@index');
 });
 
 Route::group(['prefix' => 'account'], function () {

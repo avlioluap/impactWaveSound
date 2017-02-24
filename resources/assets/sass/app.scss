@@ -8,6 +8,7 @@
 //import various scss
 @import "_login";
 @import "_sidebar";
+@import "_searchSidebar";
 
 // Bootstrap
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -26,21 +27,9 @@ body
 	background-color: $logoWhite;
 	overflow-x: hidden;
 }
-
-a,
-button
-{
-	cursor: pointer;
-	color: $logoWhite;
-}
-
-a:hover,
-a:focus
-{
-	color: $logoRed;
-	text-decoration: none;
-}
-
+/**
+ * headers
+ */
 h1
 {
 	font-weight: bold;
@@ -53,7 +42,19 @@ h2
 	font-size: 2rem;
 	margin: 1rem;
 }
-
+/**
+ * forms
+ */
+input
+{
+	padding: 0;
+	height: 2rem;
+	line-height: 2rem;
+	color: $logoGrey;
+}
+/**
+ * lists
+ */
 ul
 {
 	margin: 0;
@@ -68,6 +69,19 @@ ul
 /**
  * buttons
  */
+a,
+button
+{
+	cursor: pointer;
+	color: $logoWhite;
+}
+
+a:hover,
+a:focus
+{
+	color: $logoRed;
+	text-decoration: none;
+}
 .btn-primary {
     background: $logoGrey;
     color: $logoWhite;
@@ -114,6 +128,7 @@ ul
 		transition-timing-function: cubic-bezier(0.42,0,1,2);
 		position: relative;
 		z-index: 100;
+		color: $logoWhite;
 	}
 	#searchSideBar.closed
 	{

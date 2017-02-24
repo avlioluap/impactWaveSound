@@ -6,7 +6,7 @@
 			@include('pages.sidebar')
 		</div>
 		<div id="searchSideBar" class="closed">
-			1
+			@include('pages.sidebarSearch')
 		</div>
 		<div id="mainContent">
 			<div id="mainContentOverlay"></div>
