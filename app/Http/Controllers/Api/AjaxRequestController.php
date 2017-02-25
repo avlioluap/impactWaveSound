@@ -13,7 +13,7 @@ class AjaxRequestController extends Controller
     {
     	if( $request->ajax() )
     	{
-    		$data = LastFm::searchData($request->input('search'), $request->input('value'));
+    		$data = LastFm::searchData($request->input('search'), $request->input('value'), $request->input('page'));
     		$searchError = LastFm::getErrorMsg($data);
     		return response()->json( ($searchError) ? $searchError : $data );
     	} else {

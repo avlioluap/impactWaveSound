@@ -10,6 +10,9 @@
 		</div>
 		<div id="mainContent">
 			<div id="mainContentOverlay"></div>
+			<div id="loadingGif" class="align-items-center justify-content-center">
+				<img src="{{ asset('images/loading.gif') }}" alt="{{ config('app.name', 'ImpactWaveSound') }}">
+			</div>
 			@yield('content')
 		</div>
 	</div>

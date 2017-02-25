@@ -1,4 +1,5 @@
 var musicSearchType = "artist";
+var musicSearchPage = 1;
 /**
  * [musicChangeFormUrl alterar o url do form de pesquisa em music]
  * @param  {[string]} href [attr vindo o link do nav]
@@ -7,12 +8,14 @@ function musicChangeFormUrl( href )
 {
 	$("#musicSearchForm").attr('action', '/api/lastfm/'+href);
 }
-
+/**
+ * [musicAjaxSearch ajax request]
+ */
 function musicAjaxSearch ( type , data) {
   	return $.ajax({
 		method: 'GET',
 		url: "/api/lastfm/"+type,
-    	data: { search: type, value: data },
+    	data: { search: type, value: data, page: musicSearchPage },
 	    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 	});
 }
@@ -21,9 +24,14 @@ function musicSearch()
 {
   $("#musicSearchForm").submit( function( event ){
   	data = $("input[name=musicPesquisa]").val();
+  	//mostrar loading gif
+	$("#loadingGif").addClass('d-flex').fadeIn();
     //search for the keyword typed in the input
 	musicAjaxSearch( musicSearchType, data ).done(function( data ) {
-		console.log("hey");
+		//limpar dados de #musicSearchResults
+		$("#musicSearchResults").html();
+		//esconder loading gif
+		$("#loadingGif").removeClass('d-flex').fadeOut();
 	}).fail(function()
 	{
 		alert("Someting went wrong please try again!!!");
@@ -48,5 +56,5 @@ $(document).ready(function($) {
 
 	//music form submit
 	musicSearch();
-	//
+	//TODO: music pagination
 });

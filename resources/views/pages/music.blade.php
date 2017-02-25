@@ -1,7 +1,7 @@
 @extends('layouts.appDefault')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
 
         <section id="musicTopMenu">
         	<nav class="nav">
@@ -21,10 +21,22 @@
 		    </form>
         </section>
 
-        <section id="musicSearchResults">
-        	#
-        </section>
+        <!-- default thumb que uso para gerar as thumbnails -->
+    	<article id="musicDefaultThumb" class="thumbWrap col-xs-12 col-md-3 col-lg-2">
+    		<div class="thumbImg">
+    			<img src="" alt="">
+    			<div class="thumbOverlay d-flex align-items-center justify-content-center">
+    				<span><i class="fa fa-search" aria-hidden="true"></i></span>
+    			</div>
+    		</div>
+    		<div class="thumFooter">
+    			<span class="thumbTitle">11</span>
+    			<span class="thumbShort">22</span>
+    		</div>
+    	</article>
 
+        <section id="musicSearchResults" class="row">
+        </section>
     </div>
 </div>
 @endsection
