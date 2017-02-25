@@ -22,20 +22,51 @@ function musicAjaxSearch ( type , data) {
 
 function musicSearch()
 {
-  $("#musicSearchForm").submit( function( event ){
-  	data = $("input[name=musicPesquisa]").val();
-  	//mostrar loading gif
-	$("#loadingGif").addClass('d-flex').fadeIn();
-    //search for the keyword typed in the input
-	musicAjaxSearch( musicSearchType, data ).done(function( data ) {
+	$("#musicSearchForm").submit( function( event ){
+
+	  	data = $("input[name=musicPesquisa]").val();
+	  	//TODO: mostrar erro caso input esteja vazio
+
+	  	//mostrar loading gif
+		$("#loadingGif").addClass('d-flex').fadeIn();
+
 		//limpar dados de #musicSearchResults
-		$("#musicSearchResults").html();
-		//esconder loading gif
-		$("#loadingGif").removeClass('d-flex').fadeOut();
-	}).fail(function()
-	{
-		alert("Someting went wrong please try again!!!");
-	});
+		$("#musicSearchResults").html('');
+
+	    //search for the keyword typed in the input
+		musicAjaxSearch( musicSearchType, data ).done(function( data ) {
+
+			if (data.results.artistmatches.artist.length > 0)
+			{
+				var deafultBlock = $("#musicDefaultThumb");
+
+				$.each(data.results.artistmatches.artist, function(index, val) {
+					if ( val.image[3]['#text'] != "" )
+					{
+						var clonedBlock = deafultBlock.clone().removeClass('hide');
+
+						clonedBlock.appendTo('#musicSearchResults');
+						//cover
+						clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
+						//nome
+						clonedBlock.find('.thumbTitle').html(val.name);
+						//desc
+						//clonedBlock.find('.thumbShort').html(val.name);
+						//data-mbid
+					}
+				});
+			} else {
+				//TODO: mostrar que nao obteve resultados
+				alert("nehum resultado");
+			}
+
+			//esconder loading gif
+			$("#loadingGif").removeClass('d-flex').fadeOut();
+
+		}).fail(function()
+		{
+			alert("Someting went wrong please try again!!!");
+		});
 	event.preventDefault();
   });
 }

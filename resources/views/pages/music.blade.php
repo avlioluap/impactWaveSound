@@ -22,16 +22,16 @@
         </section>
 
         <!-- default thumb que uso para gerar as thumbnails -->
-    	<article id="musicDefaultThumb" class="thumbWrap col-xs-12 col-md-3 col-lg-2">
+    	<article id="musicDefaultThumb" class="thumbWrap hide col-xs-12 col-md-3 col-lg-2">
     		<div class="thumbImg">
-    			<img src="" alt="">
+    			<img src="" alt="" class="coverImg">
     			<div class="thumbOverlay d-flex align-items-center justify-content-center">
-    				<span><i class="fa fa-search" aria-hidden="true"></i></span>
+    				<a href="" data-mbid=""><i class="fa fa-search" aria-hidden="true"></i></a>
     			</div>
     		</div>
     		<div class="thumFooter">
-    			<span class="thumbTitle">11</span>
-    			<span class="thumbShort">22</span>
+    			<span class="thumbTitle"></span>
+    			<span class="thumbShort"></span>
     		</div>
     	</article>
 

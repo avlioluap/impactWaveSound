@@ -1,12 +1,19 @@
 #musicDefaultThumb
 {
-	display: none;
+	padding: 5px;
 	//
 	.thumbImg
 	{
 		background-color: $appBg2;
 		position: relative;
 		height: 200px;
+		overflow-y: hidden;
+		img
+		{
+			width: 100%;
+			object-fit: cover;
+
+		}
 		.thumbOverlay
 		{
 			color: white;
@@ -20,7 +27,7 @@
 			width: 100%;
 			opacity: 0;
 			transition: .5s ease;
-			span
+			a
 			{
 				border: 2px solid $logoGrey;
 				border-radius: 60px;
@@ -34,13 +41,13 @@
 					line-height: 55px;
 				}
 			}
-			span:hover
+			a:hover
 			{
 				border: 2px solid $logoWhite;
 			}
 		}
 	}
-	.thumbImg:hover .thumbOverlay 
+	.thumbImg:hover .thumbOverlay
 	{
   		opacity: 1;
 	}
