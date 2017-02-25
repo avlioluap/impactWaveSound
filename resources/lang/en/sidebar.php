@@ -9,11 +9,11 @@ return [
     |
     */
 
-    'search'    => 'Search',
-    'browse'    => 'Browse',
-    'playlist'  => 'Playlists',
-    'music'     => 'Your music',
-    'account'   => 'Account',
-    'settings'  => 'Settings',
+    'sideBarSearch'    => 'Search',
+    'sideBarBrowse'    => 'Browse',
+    'sideBarPlaylist'  => 'Playlists',
+    'sideBarMusic'     => 'Add music',
+    'sideBarAccount'   => 'Account',
+    'sideBarSettings'  => 'Settings',
 
 ];
