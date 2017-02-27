@@ -71,8 +71,13 @@
 		}
 	}
 }
+/**
+ * top menu
+ */
 #musicTopMenu
 {
+	height: 50px;
+	//
 	.nav
 	{
 		a
@@ -81,13 +86,43 @@
 		}
 	}
 }
-
+/**
+ * area do form para fazer as pesquisas
+ */
 #musicSearchArea
 {
 	padding:10px 0;
+	height: 100px;
 }
-
+/**
+ * resultados das pesquisas
+ */
 #musicSearchResults
 {
 	padding:20px 0;
+}
+/**
+ * mensagem de erro
+ */
+#musicSearchResultsError
+{
+	display: none;
+	flex: 1;
+	flex-direction: column;
+	position: relative;
+	h1
+	{
+		display: block;
+		color: $logoGrey
+	}
+	.fa
+	{
+		font-size: 10rem;
+	}
+	.mensagem
+	{
+		display: block;
+		text-align: center;
+		color: $logoWhite;
+	}
 }

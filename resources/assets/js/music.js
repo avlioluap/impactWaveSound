@@ -23,10 +23,16 @@ function musicAjaxSearch ( type , data) {
 function musicSearch()
 {
 	$("#musicSearchForm").submit( function( event ){
-
+		//esconder section de erro
+		$("musicSearchResultsError").css('display', 'none');
+		//
 	  	data = $("input[name=musicPesquisa]").val();
-	  	//TODO: mostrar erro caso input esteja vazio
-
+	  	//mostrar erro caso input esteja vazio
+	  	if ( $("input[name=musicPesquisa]").val().length == 0)
+	  	{
+	  		createMusicErrorMsg("blankInput");
+	  		return false;
+	  	}
 	  	//mostrar loading gif
 		$("#loadingGif").addClass('d-flex').fadeIn();
 
@@ -41,8 +47,8 @@ function musicSearch()
 				var deafultBlock = $("#musicDefaultThumb");
 
 				$.each(data.results.artistmatches.artist, function(index, val) {
-					if ( val.image[3]['#text'] != "" )
-					{
+					//if ( val.image[3]['#text'] != "" )
+					//{
 						var clonedBlock = deafultBlock.clone().removeClass('hide');
 
 						clonedBlock.appendTo('#musicSearchResults');
@@ -53,7 +59,7 @@ function musicSearch()
 						//desc
 						//clonedBlock.find('.thumbShort').html(val.name);
 						//data-mbid
-					}
+						//}
 				});
 			} else {
 				//TODO: mostrar que nao obteve resultados
@@ -65,9 +71,10 @@ function musicSearch()
 
 		}).fail(function()
 		{
-			alert("Someting went wrong please try again!!!");
+			console.log("Someting went wrong please try again!!!");
+			$("#loadingGif").removeClass('d-flex').fadeOut();
 		});
-	event.preventDefault();
+	return false;
   });
 }
 
