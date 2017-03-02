@@ -7,16 +7,18 @@
         	<nav class="nav">
         		<a href="artist" class="active">@lang('music.navArtist')</a>
         		<a href="album">@lang('music.navAlbum')</a>
-        		<a href="track">@lang('music.navTrack')</a>
+        		<!--<a href="track">@lang('music.navTrack')</a>-->
         	</nav>
         </section>
 
         <section id="musicSearchArea">
-			<form id="musicSearchForm" class="form-horizontal" role="form" method="POST" action="{{ url('/api/lastfm/artist') }}">
+			<form id="musicSearchForm" class="form-horizontal" role="form" method="POST" action="{{ route('music.search') }}">
 		    	{{ csrf_field() }}
-		    	<div class="inputWrap">
+		    	<div class="inputWrap form-group{{ $errors->has('musicSearch') ? 'has-error' : '' }}">
 		    		<i class="fa fa-search" aria-hidden="true"></i>
-		    		<input id="musicSearchInput" type="text" class="form-control" name="musicPesquisa" value="{{ old('musicPesquisa') }}" >
+                    <input type="hidden" name="musicSearchType" value="{{ old('musicSearchType', 'artist') }}">
+		    		<input id="musicSearchInput" type="text" class="form-control" name="musicSearch" value="{{ old('musicSearch') }}" >
+                    <label for="musicSearch" class="control-label"></label>
 		    	</div>
 		    </form>
         </section>
@@ -26,7 +28,7 @@
     		<div class="thumbImg">
     			<img src="" alt="" class="coverImg">
     			<div class="thumbOverlay d-flex align-items-center justify-content-center">
-    				<a href="" data-mbid=""><i class="fa fa-search" aria-hidden="true"></i></a>
+    				<a href="" data-mbid="" class="viewSearch"><i class="fa fa-search" aria-hidden="true"></i></a>
     			</div>
     		</div>
     		<div class="thumFooter">
@@ -37,30 +39,13 @@
 
         <section id="musicSearchResults" class="row"></section>
 
+
         <section id="musicSearchResultsError" class="align-items-center justify-content-center">
             <i class="fa fa-frown-o" aria-hidden="true"></i>
-            <h1></h1>
+            <h1>Error</h1>
             <div class="mensagem"></div>
         </section>
-    </div>
+
+     </div>
 </div>
-<script type="text/javascript">
-    function createMusicErrorMsg(type)
-    {
-        errorSection = $("#musicSearchResultsError");
-        if (type == "blankInput")
-        {
-            errorSection.find('h1').text('@lang('music.musicSearchEmptyTitle')');
-            errorSection.find('.mensagem').text('@lang('music.musicSearchEmptyMsg')');
-        }
-
-        showMusicErrorMsg();
-    }
-
-    function showMusicErrorMsg()
-    {
-        $("#musicSearchResults").html('');
-        $("#musicSearchResultsError").css('display', 'flex');
-    }
-</script>
 @endsection

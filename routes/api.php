@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'lastfm'], function () {
     //Route::get('list', 'Albums\Albumscontroller@index');
-    Route::get('artist', 'Api\AjaxRequestController@music');
-    Route::get('album', 'Api\AjaxRequestController@music');
-    Route::get('track', 'Api\AjaxRequestController@music');
+    //Route::get('artist', 'Api\AjaxRequestController@music');
+    //Route::get('album', 'Api\AjaxRequestController@music');
+    Route::any('search', 'Api\AjaxRequestController@music')->name('music.search');
 });
 

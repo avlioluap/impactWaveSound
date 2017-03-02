@@ -1,12 +1,11 @@
-var musicSearchType = "artist";
 var musicSearchPage = 1;
 /**
  * [musicChangeFormUrl alterar o url do form de pesquisa em music]
  * @param  {[string]} href [attr vindo o link do nav]
  */
-function musicChangeFormUrl( href )
+function musicChangeType( option )
 {
-	$("#musicSearchForm").attr('action', '/api/lastfm/'+href);
+	$("input[name=musicSearchType]").val( option );
 }
 /**
  * [musicAjaxSearch ajax request]
@@ -14,25 +13,20 @@ function musicChangeFormUrl( href )
 function musicAjaxSearch ( type , data) {
   	return $.ajax({
 		method: 'GET',
-		url: "/api/lastfm/"+type,
-    	data: { search: type, value: data, page: musicSearchPage },
+		url: "/api/lastfm/search",
+    	data: { musicType: type, musicPesquisa: data, musicPage: musicSearchPage },
 	    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 	});
 }
 
 function musicSearch()
 {
+
 	$("#musicSearchForm").submit( function( event ){
 		//esconder section de erro
-		$("musicSearchResultsError").css('display', 'none');
+		$("#musicSearchResultsError").css('display', 'none');
 		//
-	  	data = $("input[name=musicPesquisa]").val();
-	  	//mostrar erro caso input esteja vazio
-	  	if ( $("input[name=musicPesquisa]").val().length == 0)
-	  	{
-	  		createMusicErrorMsg("blankInput");
-	  		return false;
-	  	}
+	  	data = $("input[name=musicSearch]").val();
 	  	//mostrar loading gif
 		$("#loadingGif").addClass('d-flex').fadeIn();
 
@@ -40,55 +34,85 @@ function musicSearch()
 		$("#musicSearchResults").html('');
 
 	    //search for the keyword typed in the input
-		musicAjaxSearch( musicSearchType, data ).done(function( data ) {
+		musicAjaxSearch( $("input[name=musicSearchType]").val(), data ).done(function( data ) {
 
-			if (data.results.artistmatches.artist.length > 0)
+			if ($("input[name=musicSearchType]").val() == "artist")
 			{
-				var deafultBlock = $("#musicDefaultThumb");
+				musicSearchGenerateArtistThumbs( data );
+			}
 
-				$.each(data.results.artistmatches.artist, function(index, val) {
-					//if ( val.image[3]['#text'] != "" )
-					//{
-						var clonedBlock = deafultBlock.clone().removeClass('hide');
-
-						clonedBlock.appendTo('#musicSearchResults');
-						//cover
-						clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
-						//nome
-						clonedBlock.find('.thumbTitle').html(val.name);
-						//desc
-						//clonedBlock.find('.thumbShort').html(val.name);
-						//data-mbid
-						//}
-				});
-			} else {
-				//TODO: mostrar que nao obteve resultados
-				alert("nehum resultado");
+			if ($("input[name=musicSearchType]").val() == "album")
+			{
+				musicSearchGenerateAlbumThumbs( data);
 			}
 
 			//esconder loading gif
 			$("#loadingGif").removeClass('d-flex').fadeOut();
 
-		}).fail(function()
-		{
-			console.log("Someting went wrong please try again!!!");
-			$("#loadingGif").removeClass('d-flex').fadeOut();
+		}).fail(function( data ) {
+
+            var errors = '';
+            for(datos in data.responseJSON){
+                errors += data.responseJSON[datos] + '<br>';
+            }
+
+            $("#loadingGif").removeClass('d-flex').fadeOut();
+
+            $("#musicSearchResultsError .mensagem").html(errors);
+            $("#musicSearchResultsError").css('display', 'flex');
+
+
 		});
 	return false;
   });
 }
 
+function musicSearchGenerateArtistThumbs( data )
+{
+	if (data.results.artistmatches.artist.length > 0)
+	{
+		var deafultBlock = $("#musicDefaultThumb");
+		$.each(data.results.artistmatches.artist, function(index, val) {
+
+			var clonedBlock = deafultBlock.clone().removeClass('hide');
+
+			//if (val.mbid != "") {
+				clonedBlock.appendTo('#musicSearchResults');
+				//cover TODO: por uma imagem default caso nao tenha iumagem
+				clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
+				//nome
+				clonedBlock.find('.thumbTitle').html(val.name);
+				//link
+				clonedBlock.find('.viewSearch').attr('href', '/music/getartistalbums/'+val.name+'/'+val.mbid);
+			//}
+		});
+
+	} else {
+		//TODO: mostrar que nao obteve resultados
+		console.log("nehum resultado");
+	}
+
+}
+
+function musicSearchGenerateAlbumThumbs( data )
+{
+	console.log(data);
+}
+
 $(document).ready(function($) {
 	//music top menu click
 	$("#musicTopMenu a").on('click', function( event ){
+
 		//load section searchArea with the respective href
-		musicChangeFormUrl( $(this).attr('href') );
+		musicChangeType( $(this).attr('href') );
+
 		//mostrar active link
 		$(".nav > a").removeClass("active");
 		$(this).addClass('active');
-		//alter searchType
-		musicSearchType = $(this).attr('href');
+
 		//alterar fundo
+		//
+
 		event.preventDefault();
 	});
 

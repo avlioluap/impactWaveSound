@@ -34,9 +34,9 @@ class MusicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function artistAlbums($artist, $mbid="")
     {
-        //
+        dd("hey");
     }
 
     /**
