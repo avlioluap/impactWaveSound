@@ -1,0 +1,24 @@
+/**
+ * input wrap para inputs de search
+ */
+@mixin inputSearchWrap
+{
+	.inputWrap
+	{
+		position: relative;
+		//
+		.fa
+		{
+			position: absolute;
+			top: 8px;
+			left: 8px;
+			color: $logoGrey;
+		}
+		//
+		.form-control
+		{
+			padding:0 0 0 30px;
+		}
+		//
+	}
+}

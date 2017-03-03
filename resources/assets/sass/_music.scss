@@ -93,6 +93,7 @@
 {
 	padding:10px 0;
 	height: 100px;
+	@include inputSearchWrap;
 }
 /**
  * resultados das pesquisas
