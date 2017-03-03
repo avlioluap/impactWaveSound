@@ -12,7 +12,7 @@ class LastFm extends Model
     public static function searchData($search, $value, $page=1)
     {
 
-    	$url = "http://ws.audioscrobbler.com/2.0/?method=".$search.".search&".$search."=".$value."&page=".$page."&api_key=".self::$lastFmKey."&limit=50&format=json";
+    	$url = "http://ws.audioscrobbler.com/2.0/?method=".$search.".search&".$search."=".$value."&page=".$page."&api_key=".self::$lastFmKey."&format=json";
 		$json = file_get_contents($url);
 		$obj = json_decode($json);
 

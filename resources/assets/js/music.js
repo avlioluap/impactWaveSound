@@ -1,4 +1,5 @@
 var musicSearchPage = 1;
+var deafultBlock = $("#musicDefaultThumb");
 /**
  * [musicChangeFormUrl alterar o url do form de pesquisa em music]
  * @param  {[string]} href [attr vindo o link do nav]
@@ -38,12 +39,12 @@ function musicSearch()
 
 			if ($("input[name=musicSearchType]").val() == "artist")
 			{
-				musicSearchGenerateArtistThumbs( data );
+				generateThumbs("artist", data );
 			}
 
 			if ($("input[name=musicSearchType]").val() == "album")
 			{
-				musicSearchGenerateAlbumThumbs( data);
+				generateThumbs("album", data);
 			}
 
 			//esconder loading gif
@@ -67,36 +68,41 @@ function musicSearch()
   });
 }
 
-function musicSearchGenerateArtistThumbs( data )
+function generateThumbs ( type, data )
 {
-	if (data.results.artistmatches.artist.length > 0)
-	{
-		var deafultBlock = $("#musicDefaultThumb");
-		$.each(data.results.artistmatches.artist, function(index, val) {
+	var obj,
+		href;
+	//caso for para artistas
+	if (type == "artist") { obj = data.results.artistmatches.artist; href = "/music/getartistalbums/"; }
+	//caso for paara albums
+	if (type == "album") { 	obj = data.results.albummatches.album; href = "/music/getartistalbums/"; }
+	//caso for para musicas
 
+	if ( obj.length > 0)
+	{
+		//each loop
+		$.each(obj, function(index, val) {
 			var clonedBlock = deafultBlock.clone().removeClass('hide');
 
-			//if (val.mbid != "") {
-				clonedBlock.appendTo('#musicSearchResults');
-				//cover TODO: por uma imagem default caso nao tenha iumagem
-				clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
-				//nome
-				clonedBlock.find('.thumbTitle').html(val.name);
-				//link
-				clonedBlock.find('.viewSearch').attr('href', '/music/getartistalbums/'+val.name+'/'+val.mbid);
-			//}
+			clonedBlock.appendTo('#musicSearchResults');
+			//cover TODO: por uma imagem default caso nao tenha iumagem
+			clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
+			//nome
+			clonedBlock.find('.thumbTitle').html(function(){
+				if (type == "artist") { return val.name; }
+				if (type == "album") { return val.artist+'<br>'+val.name; }
+			});
+			//link
+			clonedBlock.find('.viewSearch').attr("href", function(){
+				if (type == "artist") { return href+val.name+'/'+val.mbid; }
+				if (type == "album") { return href+val.artist+'/'+val.name; }
+			});
 		});
-
+		//
 	} else {
 		//TODO: mostrar que nao obteve resultados
-		console.log("nehum resultado");
+		console.log("nenhum resultado");
 	}
-
-}
-
-function musicSearchGenerateAlbumThumbs( data )
-{
-	console.log(data);
 }
 
 $(document).ready(function($) {

@@ -31,7 +31,10 @@ Route::group(['prefix' => 'playlist'], function () {
 Route::group(['prefix' => 'music'], function () {
 	Route::get('/', 'MusicController@index');
     //pagina que lista os albums de um artista
-    Route::get('getartistalbums/{artist}/{mbid}', 'MusicController@artistAlbums');	
+    Route::get('getartistalbums/{artist}/{mbid}', 'MusicController@artistAlbums');
+
+    //info de album
+    Route::get('getartistalbums/{artist}/{album}', 'MusicController@artistAlbums');
 });
 
 Route::group(['prefix' => 'account'], function () {
