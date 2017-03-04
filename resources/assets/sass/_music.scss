@@ -4,7 +4,7 @@
 	//
 	.thumbImg
 	{
-		background-color: $appBg2;
+		background: url('/images/logo.png') $appBg2;
 		position: relative;
 		height: 200px;
 		overflow-y: hidden;
@@ -83,6 +83,11 @@
 		a
 		{
 			margin-right: 10px;
+		}
+
+		a.active
+		{
+			border-bottom: 3px solid $logoRed;
 		}
 	}
 }

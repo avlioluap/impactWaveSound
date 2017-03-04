@@ -182,5 +182,26 @@ a:focus
 	    z-index: 90;
 	}
 	//
+	#rightContent
+	{
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 100;
+		min-width: $rightContentMinWidth;
+        box-shadow: -2px 0 5px -2px $appBg;
+		background-color: $appBg2;
+		transition-property: all;
+		transition-duration: 1s;
+		transition-timing-function: cubic-bezier(0.42,0,1,2);
+		color: $logoWhite;
+	}
+	#rightContent.closed
+	{
+		width: 0px;
+		display: none;
+	}	
+	//
 }
 

@@ -3,10 +3,10 @@
 @section('body')
 	<div class="appWrapper">
 		<div id="mainMenu">
-			@include('pages.sidebar')
+			@include('layouts.sidebar')
 		</div>
 		<div id="searchSideBar" class="closed">
-			@include('pages.sidebarSearch')
+			@include('layouts.sidebarSearch')
 		</div>
 		<div id="mainContent">
 			<div id="mainContentOverlay"></div>
@@ -14,6 +14,7 @@
 				<img src="{{ asset('images/loading.gif') }}" alt="{{ config('app.name', 'ImpactWaveSound') }}">
 			</div>
 			@yield('content')
+			<div id="rightContent" class="closed"></div>
 		</div>
 	</div>
 	<!-- Modal -->

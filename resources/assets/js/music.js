@@ -22,7 +22,6 @@ function musicAjaxSearch ( type , data) {
 
 function musicSearch()
 {
-
 	$("#musicSearchForm").submit( function( event ){
 		//esconder section de erro
 		$("#musicSearchResultsError").css('display', 'none');
@@ -32,37 +31,24 @@ function musicSearch()
 		$("#loadingGif").addClass('d-flex').fadeIn();
 
 		//limpar dados de #musicSearchResults
-		$("#musicSearchResults").html('');
+		$("#musicSearchResults").empty();
 
 	    //search for the keyword typed in the input
 		musicAjaxSearch( $("input[name=musicSearchType]").val(), data ).done(function( data ) {
 
-			if ($("input[name=musicSearchType]").val() == "artist")
-			{
-				generateThumbs("artist", data );
-			}
-
-			if ($("input[name=musicSearchType]").val() == "album")
-			{
-				generateThumbs("album", data);
-			}
+			if ($("input[name=musicSearchType]").val() == "artist") { generateThumbs("artist", data ); }
+			if ($("input[name=musicSearchType]").val() == "album" ) { generateThumbs("album", data); }
 
 			//esconder loading gif
 			$("#loadingGif").removeClass('d-flex').fadeOut();
-
 		}).fail(function( data ) {
-
             var errors = '';
             for(datos in data.responseJSON){
                 errors += data.responseJSON[datos] + '<br>';
             }
-
             $("#loadingGif").removeClass('d-flex').fadeOut();
-
             $("#musicSearchResultsError .mensagem").html(errors);
             $("#musicSearchResultsError").css('display', 'flex');
-
-
 		});
 	return false;
   });
@@ -73,9 +59,9 @@ function generateThumbs ( type, data )
 	var obj,
 		href;
 	//caso for para artistas
-	if (type == "artist") { obj = data.results.artistmatches.artist; href = "/music/getartistalbums/"; }
+	if (type == "artist") { obj = data.results.artistmatches.artist; href = "/music/artistalbums/"; }
 	//caso for paara albums
-	if (type == "album") { 	obj = data.results.albummatches.album; href = "/music/getartistalbums/"; }
+	if (type == "album") { 	obj = data.results.albummatches.album; href = "/music/albuminfo/"; }
 	//caso for para musicas
 
 	if ( obj.length > 0)
@@ -94,35 +80,47 @@ function generateThumbs ( type, data )
 			});
 			//link
 			clonedBlock.find('.viewSearch').attr("href", function(){
-				if (type == "artist") { return href+val.name+'/'+val.mbid; }
-				if (type == "album") { return href+val.artist+'/'+val.name; }
+				if (type == "artist") { return href+val.name.replace(/\s/g,"-")+'/'+val.mbid; }
+				if (type == "album") { return href+val.artist.replace(/\s/g,"-")+'/'+val.name.replace(/\s/g,"-"); }
 			});
 		});
 		//
 	} else {
 		//TODO: mostrar que nao obteve resultados
-		console.log("nenhum resultado");
+        $("#loadingGif").removeClass('d-flex').fadeOut();
+        $("#musicSearchResultsError .mensagem").html('No match found.');
+        $("#musicSearchResultsError").css('display', 'flex');
 	}
 }
 
 $(document).ready(function($) {
 	//music top menu click
 	$("#musicTopMenu a").on('click', function( event ){
-
 		//load section searchArea with the respective href
 		musicChangeType( $(this).attr('href') );
-
 		//mostrar active link
 		$(".nav > a").removeClass("active");
 		$(this).addClass('active');
-
 		//alterar fundo
 		//
-
 		event.preventDefault();
 	});
 
 	//music form submit
 	musicSearch();
+
+    //ao clickar nos links da thumb
+    $("#musicSearchResults").on('click', '.viewSearch', function(){
+    	$("#rightContent").empty();
+
+        $("#rightContent").load($(this).attr('href'), function() {
+            /* Act on the event */
+        });
+
+        openRightContent();
+        return false;
+    });
+	//
+
 	//TODO: music pagination
 });

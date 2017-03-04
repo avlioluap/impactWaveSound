@@ -26,7 +26,7 @@ class MusicController extends Controller
     public function index()
     {
        // dd(Album::all());
-        return view('pages.music');
+        return view('pages.music.music');
     }
 
     /**
@@ -34,9 +34,15 @@ class MusicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function artistAlbums($artist, $mbid="")
+    public function artistAlbums($artist="", $mbid="")
     {
-        dd("hey");
+
+        return view('pages.music.artistAlbums', compact('artist'));
+    }
+
+    public function albumInfo($artist="", $album="")
+    {
+        dd("album");
     }
 
     /**
