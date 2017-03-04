@@ -132,3 +132,32 @@
 		color: $logoWhite;
 	}
 }
+/**
+ * right content das search
+ */
+#artistInfoHeader
+{
+	//
+	.artistInfoThumbImg
+	{
+		width: 200px;
+	}
+	//
+	.artistInfoText
+	{
+
+	}
+	//
+}
+#artistInfoListAlbums
+{
+	//
+	.table
+	{
+		@include inputSearchWrap;
+		img
+		{
+			width: 100px;
+		}
+	}
+}

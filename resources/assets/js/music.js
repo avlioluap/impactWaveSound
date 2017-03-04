@@ -8,6 +8,13 @@ function musicChangeType( option )
 {
 	$("input[name=musicSearchType]").val( option );
 }
+
+function showMusicErrorMsg(errors)
+{
+    $("#loadingGif").removeClass('d-flex').fadeOut();
+    $("#musicSearchResultsError .mensagem").html(errors);
+    $("#musicSearchResultsError").css('display', 'flex');
+}
 /**
  * [musicAjaxSearch ajax request]
  */
@@ -46,9 +53,7 @@ function musicSearch()
             for(datos in data.responseJSON){
                 errors += data.responseJSON[datos] + '<br>';
             }
-            $("#loadingGif").removeClass('d-flex').fadeOut();
-            $("#musicSearchResultsError .mensagem").html(errors);
-            $("#musicSearchResultsError").css('display', 'flex');
+            showMusicErrorMsg(errors)
 		});
 	return false;
   });
@@ -57,7 +62,8 @@ function musicSearch()
 function generateThumbs ( type, data )
 {
 	var obj,
-		href;
+		href
+		nombid = 0;
 	//caso for para artistas
 	if (type == "artist") { obj = data.results.artistmatches.artist; href = "/music/artistalbums/"; }
 	//caso for paara albums
@@ -68,29 +74,54 @@ function generateThumbs ( type, data )
 	{
 		//each loop
 		$.each(obj, function(index, val) {
-			var clonedBlock = deafultBlock.clone().removeClass('hide');
 
-			clonedBlock.appendTo('#musicSearchResults');
-			//cover TODO: por uma imagem default caso nao tenha iumagem
-			clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
-			//nome
-			clonedBlock.find('.thumbTitle').html(function(){
-				if (type == "artist") { return val.name; }
-				if (type == "album") { return val.artist+'<br>'+val.name; }
-			});
-			//link
-			clonedBlock.find('.viewSearch').attr("href", function(){
-				if (type == "artist") { return href+val.name.replace(/\s/g,"-")+'/'+val.mbid; }
-				if (type == "album") { return href+val.artist.replace(/\s/g,"-")+'/'+val.name.replace(/\s/g,"-"); }
-			});
+			if (val.mbid.length > 0)
+			{
+				var clonedBlock = deafultBlock.clone().removeClass('hide');
+
+				clonedBlock.appendTo('#musicSearchResults');
+				//cover TODO: por uma imagem default caso nao tenha iumagem
+				clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
+				//nome
+				clonedBlock.find('.thumbTitle').html(function(){
+					if (type == "artist") { return val.name; }
+					if (type == "album") { return val.artist+'<br>'+val.name; }
+				});
+				//link
+				clonedBlock.find('.viewSearch').attr("href", function(){
+					if (type == "artist") { return href+val.name.replace(/\s/g,"-")+'/'+val.mbid; }
+					if (type == "album") { return href+val.artist.replace(/\s/g,"-")+'/'+val.name.replace(/\s/g,"-"); }
+				});
+				//data-cover
+				clonedBlock.find('.viewSearch').attr("data-cover", val.image[3]['#text']);
+
+				mbid = 1;
+			}
 		});
 		//
 	} else {
-		//TODO: mostrar que nao obteve resultados
-        $("#loadingGif").removeClass('d-flex').fadeOut();
-        $("#musicSearchResultsError .mensagem").html('No match found.');
-        $("#musicSearchResultsError").css('display', 'flex');
+		//mostrar que nao obteve resultados
+        showMusicErrorMsg("No match found.")
 	}
+
+	//error count caso nao haja mbids
+	if ( nombid > 0)
+	{
+		showMusicErrorMsg("No match found.")
+	}
+	//
+}
+
+function searchRcTable( value )
+{
+	$.each( $(".tableTr"), function(index, val) {
+		if ( $(this).attr('data-search').search(value.toLowerCase()) == -1 )
+		{
+			$(this).fadeOut();
+		} else {
+			$(this).fadeIn();
+		}
+	});
 }
 
 $(document).ready(function($) {
@@ -112,14 +143,23 @@ $(document).ready(function($) {
     //ao clickar nos links da thumb
     $("#musicSearchResults").on('click', '.viewSearch', function(){
     	$("#rightContent").empty();
-
+    	//
+    	var cover = $(this).attr('data-cover');
         $("#rightContent").load($(this).attr('href'), function() {
-            /* Act on the event */
+        	//mostrar imagem do thum selecionado
+            $("#rightContent").find('.artistInfoThumbImg').attr('src', cover);
         });
-
+        //
         openRightContent();
+        //
         return false;
     });
+
+	//rContent table search
+	$("#rightContent").on("change paste keypress", ":input[name='musicRcFilter']", function ()
+	{
+		searchRcTable( $("input[name='musicRcFilter']").val() );
+	});
 	//
 
 	//TODO: music pagination

@@ -54,7 +54,7 @@ $(document).ready(function($) {
 			$("#searchSideBar").addClass('closed');
 			$("#mainContentOverlay").hide();
 		}
-		//riughtcontent
+		//rightcontent
 		if ( $("#rightContent").is(':visible') )
 		{
 			$("#rightContent").addClass('closed');

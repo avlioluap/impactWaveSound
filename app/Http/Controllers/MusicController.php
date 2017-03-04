@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Music;
 use App\Album;
 use App\Track;
+use App\LastFm;
+use Response;
 use Illuminate\Http\Request;
 
 class MusicController extends Controller
@@ -34,10 +36,16 @@ class MusicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function artistAlbums($artist="", $mbid="")
+    public function artistAlbums($artist, $mbid="")
     {
+        //procurar albums do artista
+        $data = LastFm::searchArtistAlbum($artist, $mbid);
+        $searchError = LastFm::getErrorMsg($data);
 
-        return view('pages.music.artistAlbums', compact('artist'));
+        $obj = ($searchError) ? $searchError : $data->topalbums->album;
+        return view('pages.music.artistAlbums')
+            ->with( "obj", $obj)
+            ->with( "artist", $artist);
     }
 
     public function albumInfo($artist="", $album="")

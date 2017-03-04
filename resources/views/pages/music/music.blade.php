@@ -28,7 +28,9 @@
     		<div class="thumbImg">
     			<img src="" alt="" class="coverImg">
     			<div class="thumbOverlay d-flex align-items-center justify-content-center">
-    				<a href="" data-mbid="" class="viewSearch"><i class="fa fa-search" aria-hidden="true"></i></a>
+    				<a href="" data-mbid="" class="viewSearch" data-cover="">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </a>
     			</div>
     		</div>
     		<div class="thumFooter">

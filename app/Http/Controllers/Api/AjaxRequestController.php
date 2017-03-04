@@ -10,6 +10,11 @@ use App\LastFm;
 
 class AjaxRequestController extends Controller
 {
+    /**
+     * search request para artistas e album usado em music index()
+     * @param  MusicSearchRequest $request [description]
+     * @return [json] devolve um obj json do request
+     */
     public function music(MusicSearchRequest $request)
     {
     	if( $request->ajax() )

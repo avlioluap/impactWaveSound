@@ -16,4 +16,8 @@ return [
     'musicSearchEmptyTitle' => 'Error',
     'musicSearchEmptyMsg' => 'Please insert a value to search!!!',
 
+    'tableCover' => 'Cover',
+    'tableName' => 'Name',
+    'tableSearchPh' => 'Search Album',
+
 ];

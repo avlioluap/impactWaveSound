@@ -196,6 +196,7 @@ a:focus
 		transition-duration: 1s;
 		transition-timing-function: cubic-bezier(0.42,0,1,2);
 		color: $logoWhite;
+		overflow-y: scroll;
 	}
 	#rightContent.closed
 	{
