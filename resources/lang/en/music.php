@@ -19,5 +19,8 @@ return [
     'tableCover' => 'Cover',
     'tableName' => 'Name',
     'tableSearchPh' => 'Search Album',
+    'tableTrack' => 'Song',
+    'tableRank' => 'Rank',
+    'tableDuration' => 'Duration',
 
 ];

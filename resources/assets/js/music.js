@@ -62,8 +62,7 @@ function musicSearch()
 function generateThumbs ( type, data )
 {
 	var obj,
-		href
-		nombid = 0;
+		href;
 	//caso for para artistas
 	if (type == "artist") { obj = data.results.artistmatches.artist; href = "/music/artistalbums/"; }
 	//caso for paara albums
@@ -75,12 +74,12 @@ function generateThumbs ( type, data )
 		//each loop
 		$.each(obj, function(index, val) {
 
-			if (val.mbid.length > 0)
-			{
+			//if (val.mbid.length > 0)
+			//{
 				var clonedBlock = deafultBlock.clone().removeClass('hide');
 
 				clonedBlock.appendTo('#musicSearchResults');
-				//cover TODO: por uma imagem default caso nao tenha iumagem
+				//cover:
 				clonedBlock.find('.coverImg').attr('src', val.image[3]['#text']);
 				//nome
 				clonedBlock.find('.thumbTitle').html(function(){
@@ -89,27 +88,19 @@ function generateThumbs ( type, data )
 				});
 				//link
 				clonedBlock.find('.viewSearch').attr("href", function(){
-					if (type == "artist") { return href+val.name.replace(/\s/g,"-")+'/'+val.mbid; }
-					if (type == "album") { return href+val.artist.replace(/\s/g,"-")+'/'+val.name.replace(/\s/g,"-"); }
+					if (type == "artist") { return href+val.name; }
+					if (type == "album") { return href+val.artist+'/'+val.name; }
 				});
 				//data-cover
 				clonedBlock.find('.viewSearch').attr("data-cover", val.image[3]['#text']);
 
-				mbid = 1;
-			}
+			//}
 		});
 		//
 	} else {
 		//mostrar que nao obteve resultados
         showMusicErrorMsg("No match found.")
 	}
-
-	//error count caso nao haja mbids
-	if ( nombid > 0)
-	{
-		showMusicErrorMsg("No match found.")
-	}
-	//
 }
 
 function searchRcTable( value )

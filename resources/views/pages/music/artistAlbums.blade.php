@@ -24,13 +24,13 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($obj as $album)
+		  	@foreach($albums as $album)
 			    <tr class="tableTr" data-search="{{ strtolower($album->name) }}">
-			      <th scope="row">
-			      	<a href="{{ route('music.rcontent.album', ["artist"=>$artist, "album"=>$album->name]) }}" data-mbid="" class="viewSearch">
+			      <td scope="row">
+			      	<a href="{{ route('music.rcontent.album', ["artist"=>$artist, "album"=>$album->name]) }}" class="viewSearch">
 			      		<i class="fa fa-search" aria-hidden="true"></i>
 			      	</a>
-			      </th>
+			      </td>
 			      <td width="200px"><img src="{{ $album->image[3]->{'#text'} }}" alt="{{ $album->name }}"></td>
 			      <td>
 			      	<h4>{{ $album->name }}</h4>

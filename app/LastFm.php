@@ -26,14 +26,23 @@ class LastFm extends Model
     	return $obj;
     }
     /**
-     * [searchArtistAlbum usado em MusicController@artistAlbums]
+     * [searchArtistAlbum usado em MusicController@artistAlbums, MusicController@albumInfo]
      * @param  [type] $artist [description]
      * @param  string $mbid   [description]
      * @return [type]         [description]
      */
-    public static function searchArtistAlbum($artist, $mbid="")
+    public static function searchArtistAlbum($artist, $limit=100)
     {
-        $url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=".$artist."&mbid=".$mbid."&autocorrect=1&api_key=".self::$lastFmKey."&limit=100&format=json";
+        $url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=".$artist."&autocorrect=1&api_key=".self::$lastFmKey."&limit=".$limit."&format=json";
+        $json = file_get_contents($url);
+        $obj = json_decode($json);
+
+        return $obj;
+    }
+
+    public static function searchAlbumInfo($artist, $album)
+    {
+        $url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=".self::$lastFmKey."&artist=".$artist."&album=".$album."&format=json";
         $json = file_get_contents($url);
         $obj = json_decode($json);
 

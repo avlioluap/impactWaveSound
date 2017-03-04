@@ -36,21 +36,53 @@ class MusicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function artistAlbums($artist, $mbid="")
+    public function artistAlbums($artist)
     {
         //procurar albums do artista
-        $data = LastFm::searchArtistAlbum($artist, $mbid);
+        $data = LastFm::searchArtistAlbum($artist);
         $searchError = LastFm::getErrorMsg($data);
-
         $obj = ($searchError) ? $searchError : $data->topalbums->album;
+
         return view('pages.music.artistAlbums')
-            ->with( "obj", $obj)
-            ->with( "artist", $artist);
+            ->with("albums", $obj)
+            ->with("artist", $artist);
     }
 
-    public function albumInfo($artist="", $album="")
+    public function albumInfo($artist, $album)
     {
-        dd("album");
+        //procurar info do album
+        $data = LastFm::searchAlbumInfo($artist, $album);
+        $searchError = LastFm::getErrorMsg($data);
+        $obj = ($searchError) ? $searchError : $data->album;
+
+        //more by this artist
+        $moreByArtist = LastFm::searchArtistAlbum($artist, '', 20)->topalbums->album;
+        //
+        $x = 1;
+        $more = [];
+        $arrAlbumNames = [];
+        while ( $x <= 5) {
+            $rand = array_rand($moreByArtist);
+
+            if( isset($moreByArtist[$rand]->name) )
+            {
+
+                if( $obj->name != $moreByArtist[$rand]->name )
+                {
+                    if(!in_array($moreByArtist[$rand]->name, $arrAlbumNames))
+                    {
+                        array_push($more, $moreByArtist[$rand]);
+                        array_push($arrAlbumNames, $moreByArtist[$rand]->name);
+                        $x++;
+                    }
+                }
+            }
+        }
+        //
+
+        return view('pages.music.albumInfo')
+            ->with("album", $obj)
+            ->with("moreBy", $more);
     }
 
     /**
