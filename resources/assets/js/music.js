@@ -21,7 +21,7 @@ function showMusicErrorMsg(errors)
 function musicAjaxSearch ( type , data) {
   	return $.ajax({
 		method: 'GET',
-		url: "/api/lastfm/search",
+		url: APP_URL+"/api/lastfm/search",
     	data: { musicType: type, musicPesquisa: data, musicPage: musicSearchPage },
 	    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 	});
@@ -64,9 +64,9 @@ function generateThumbs ( type, data )
 	var obj,
 		href;
 	//caso for para artistas
-	if (type == "artist") { obj = data.results.artistmatches.artist; href = APP_URL+"/music/artistalbums/"; }
+	if (type == "artist") { obj = data.results.artistmatches.artist; href = APP_URL+"music/artistalbums/"; }
 	//caso for paara albums
-	if (type == "album") { 	obj = data.results.albummatches.album; href = APP_URL+"/music/albuminfo/"; }
+	if (type == "album") { 	obj = data.results.albummatches.album; href = APP_URL+"music/albuminfo/"; }
 	//caso for para musicas
 
 	if ( obj.length > 0)
