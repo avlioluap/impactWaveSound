@@ -32,6 +32,7 @@
     <!-- Scripts -->
     <script type="text/javascript">
         var APP_URL = {!! json_encode(url('/')) !!};
+        console.log(APP_URL);
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

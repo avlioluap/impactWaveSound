@@ -64,9 +64,9 @@ function generateThumbs ( type, data )
 	var obj,
 		href;
 	//caso for para artistas
-	if (type == "artist") { obj = data.results.artistmatches.artist; href = "/music/artistalbums/"; }
+	if (type == "artist") { obj = data.results.artistmatches.artist; href = APP_URL+"/music/artistalbums/"; }
 	//caso for paara albums
-	if (type == "album") { 	obj = data.results.albummatches.album; href = "/music/albuminfo/"; }
+	if (type == "album") { 	obj = data.results.albummatches.album; href = APP_URL+"/music/albuminfo/"; }
 	//caso for para musicas
 
 	if ( obj.length > 0)
