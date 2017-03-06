@@ -30,6 +30,9 @@
 <body>
     @yield('body')
     <!-- Scripts -->
+    <script type="text/javascript">
+        var APP_URL = {!! json_encode(url('/')) !!};
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
